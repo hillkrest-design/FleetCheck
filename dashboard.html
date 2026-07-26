@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FleetCheck Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>FleetCheck Dashboard</h1>
+
+</header>
+
+<nav>
+
+    <a href="dashboard.html">Dashboard</a>
+
+    <a href="vehicles.html">Vehicles</a>
+
+    <a href="#">Inspections</a>
+
+    <a href="#">Maintenance</a>
+
+    <a href="#" onclick="logout()">Logout</a>
+
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2 id="welcomeUser">
+            Welcome!
+        </h2>
+
+        <p>
+            This is your FleetCheck dashboard.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Fleet Summary</h2>
+
+        <table>
+
+            <tr>
+
+                <th>Category</th>
+
+                <th>Total</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Vehicles</td>
+
+                <td>3</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Open Maintenance Items</td>
+
+                <td>2</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Completed Inspections</td>
+
+                <td id="inspectionCount">0</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Upcoming Maintenance</h2>
+
+        <ul>
+
+            <li>2019 Ford F-150 — Oil Change</li>
+
+            <li>2021 Chevrolet Silverado — Tire Rotation</li>
+
+            <li>2023 Freightliner Cascadia — DOT Inspection</li>
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Quick Actions</h2>
+
+        <a class="button" href="vehicles.html">
+
+            Manage Vehicles
+
+        </a>
+
+        <button
+            class="button"
+            onclick="inspectionsCompleted()">
+
+            Complete Demo Inspection
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
