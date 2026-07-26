@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FleetCheck - Vehicles</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>FleetCheck Vehicle Management</h1>
+
+</header>
+
+<nav>
+
+    <a href="dashboard.html">Dashboard</a>
+
+    <a href="vehicles.html">Vehicles</a>
+
+    <a href="#">Inspections</a>
+
+    <a href="#">Maintenance</a>
+
+    <a href="#" onclick="logout()">Logout</a>
+
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Your Fleet</h2>
+
+        <p>
+            View and manage vehicles currently assigned to your fleet.
+        </p>
+
+        <button
+            class="button"
+            onclick="addVehicle()">
+
+            + Add Vehicle
+
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <table id="vehicleTable">
+
+            <tr>
+
+                <th>Year</th>
+
+                <th>Make</th>
+
+                <th>Model</th>
+
+                <th>Status</th>
+
+            </tr>
+
+            <tr>
+
+                <td>2023</td>
+
+                <td>Freightliner</td>
+
+                <td>Cascadia</td>
+
+                <td>Good</td>
+
+            </tr>
+
+            <tr>
+
+                <td>2021</td>
+
+                <td>Chevrolet</td>
+
+                <td>Silverado</td>
+
+                <td>Needs Service</td>
+
+            </tr>
+
+            <tr>
+
+                <td>2019</td>
+
+                <td>Ford</td>
+
+                <td>F-150</td>
+
+                <td>Good</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Future Features</h2>
+
+        <ul>
+
+            <li>Vehicle inspection history</li>
+
+            <li>Maintenance reminders</li>
+
+            <li>VIN lookup</li>
+
+            <li>Photo uploads</li>
+
+            <li>Mileage tracking</li>
+
+            <li>DOT inspection records</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
