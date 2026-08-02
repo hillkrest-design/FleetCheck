@@ -1,141 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FleetCheck - Vehicles</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FleetCheck - Vehicles</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <header>
 
-    <h1>FleetCheck Vehicle Management</h1>
+<h1>FleetCheck Vehicle Management</h1>
 
 </header>
 
 <nav>
 
-    <a href="dashboard.html">Dashboard</a>
+<a href="dashboard.html">Dashboard</a>
 
-    <a href="vehicles.html">Vehicles</a>
+<a href="vehicles.html">Vehicles</a>
 
-    <a href="#">Inspections</a>
+<a href="inspections.html">Inspections</a>
 
-    <a href="#">Maintenance</a>
+<a href="maintenance.html">Maintenance</a>
 
-    <a href="#" onclick="logout()">Logout</a>
+<a href="#" onclick="logout()">Logout</a>
 
 </nav>
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
 
-        <h2>Your Fleet</h2>
+<h2>Add Vehicle</h2>
 
-        <p>
-            View and manage vehicles currently assigned to your fleet.
-        </p>
+<form id="vehicleForm">
 
-        <button
-            class="button"
-            onclick="addVehicle()">
+<label>Year</label>
 
-            + Add Vehicle
+<input type="number" id="year" required>
 
-        </button>
+<label>Make</label>
 
-    </div>
+<input type="text" id="make" required>
 
-    <div class="card">
+<label>Model</label>
 
-        <table id="vehicleTable">
+<input type="text" id="model" required>
 
-            <tr>
+<label>VIN</label>
 
-                <th>Year</th>
+<input type="text" id="vin">
 
-                <th>Make</th>
+<label>Mileage</label>
 
-                <th>Model</th>
+<input type="number" id="mileage">
 
-                <th>Status</th>
+<button type="submit">
 
-            </tr>
+Save Vehicle
 
-            <tr>
+</button>
 
-                <td>2023</td>
+</form>
 
-                <td>Freightliner</td>
+</div>
 
-                <td>Cascadia</td>
+<div class="card">
 
-                <td>Good</td>
+<h2>Fleet Vehicles</h2>
 
-            </tr>
+<table id="vehicleTable">
 
-            <tr>
+<thead>
 
-                <td>2021</td>
+<tr>
 
-                <td>Chevrolet</td>
+<th>Year</th>
 
-                <td>Silverado</td>
+<th>Make</th>
 
-                <td>Needs Service</td>
+<th>Model</th>
 
-            </tr>
+<th>VIN</th>
 
-            <tr>
+<th>Mileage</th>
 
-                <td>2019</td>
+<th>Action</th>
 
-                <td>Ford</td>
+</tr>
 
-                <td>F-150</td>
+</thead>
 
-                <td>Good</td>
+<tbody>
 
-            </tr>
+</tbody>
 
-        </table>
+</table>
 
-    </div>
-
-    <div class="card">
-
-        <h2>Future Features</h2>
-
-        <ul>
-
-            <li>Vehicle inspection history</li>
-
-            <li>Maintenance reminders</li>
-
-            <li>VIN lookup</li>
-
-            <li>Photo uploads</li>
-
-            <li>Mileage tracking</li>
-
-            <li>DOT inspection records</li>
-
-        </ul>
-
-    </div>
+</div>
 
 </div>
 
 <script src="js/script.js"></script>
 
 </body>
-
 </html>
