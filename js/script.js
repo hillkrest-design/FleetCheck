@@ -117,3 +117,97 @@ window.addEventListener("load", function () {
     }
 
 });
+
+
+
+
+
+// ===========================
+// Vehicle Management
+// ===========================
+
+let vehicles =
+JSON.parse(localStorage.getItem("vehicles")) || [];
+
+const vehicleForm =
+document.getElementById("vehicleForm");
+
+if(vehicleForm){
+
+displayVehicles();
+
+vehicleForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const vehicle={
+
+year:document.getElementById("year").value,
+
+make:document.getElementById("make").value,
+
+model:document.getElementById("model").value,
+
+vin:document.getElementById("vin").value,
+
+mileage:document.getElementById("mileage").value
+
+};
+
+vehicles.push(vehicle);
+
+localStorage.setItem(
+"vehicles",
+JSON.stringify(vehicles)
+);
+
+displayVehicles();
+
+vehicleForm.reset();
+
+});
+
+}
+
+function displayVehicles(){
+
+const tbody=
+document.querySelector("#vehicleTable tbody");
+
+if(!tbody) return;
+
+tbody.innerHTML="";
+
+vehicles.forEach((vehicle,index)=>{
+
+let row=tbody.insertRow();
+
+row.insertCell(0).innerHTML=vehicle.year;
+row.insertCell(1).innerHTML=vehicle.make;
+row.insertCell(2).innerHTML=vehicle.model;
+row.insertCell(3).innerHTML=vehicle.vin;
+row.insertCell(4).innerHTML=vehicle.mileage;
+
+let action=row.insertCell(5);
+
+action.innerHTML=
+`<button onclick="deleteVehicle(${index})">
+Delete
+</button>`;
+
+});
+
+}
+
+function deleteVehicle(index){
+
+vehicles.splice(index,1);
+
+localStorage.setItem(
+"vehicles",
+JSON.stringify(vehicles)
+);
+
+displayVehicles();
+
+}
