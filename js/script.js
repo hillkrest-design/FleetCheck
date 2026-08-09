@@ -211,3 +211,274 @@ JSON.stringify(vehicles)
 displayVehicles();
 
 }
+
+
+// ==========================================
+// FleetCheck - Inspection Management
+// Sprint 3
+// ==========================================
+
+let inspections =
+    JSON.parse(localStorage.getItem("inspections")) || [];
+
+
+// ------------------------------------------
+// Load Vehicles Into Inspection Dropdown
+// ------------------------------------------
+
+function loadInspectionVehicles() {
+
+    const vehicleSelect =
+        document.getElementById("inspectionVehicle");
+
+    if (!vehicleSelect) {
+        return;
+    }
+
+    const vehicles =
+        JSON.parse(localStorage.getItem("vehicles")) || [];
+
+    vehicleSelect.innerHTML =
+        '<option value="">Select a vehicle</option>';
+
+    vehicles.forEach(function(vehicle, index) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+            vehicle.year + " " +
+            vehicle.make + " " +
+            vehicle.model;
+
+        vehicleSelect.appendChild(option);
+
+    });
+
+}
+
+
+// ------------------------------------------
+// Display Inspection History
+// ------------------------------------------
+
+function displayInspections() {
+
+    const tableBody =
+        document.querySelector("#inspectionTable tbody");
+
+    if (!tableBody) {
+        return;
+    }
+
+    tableBody.innerHTML = "";
+
+    if (inspections.length === 0) {
+
+        const row =
+            tableBody.insertRow();
+
+        const cell =
+            row.insertCell(0);
+
+        cell.colSpan = 5;
+
+        cell.innerHTML =
+            "No inspections have been recorded yet.";
+
+        return;
+    }
+
+    inspections.forEach(function(inspection) {
+
+        const row =
+            tableBody.insertRow();
+
+        row.insertCell(0).textContent =
+            inspection.date;
+
+        row.insertCell(1).textContent =
+            inspection.vehicle;
+
+        row.insertCell(2).textContent =
+            inspection.type;
+
+        row.insertCell(3).textContent =
+            inspection.status;
+
+        row.insertCell(4).textContent =
+            inspection.notes || "None";
+
+    });
+
+}
+
+
+// ------------------------------------------
+// Inspection Form
+// ------------------------------------------
+
+const inspectionForm =
+    document.getElementById("inspectionForm");
+
+
+if (inspectionForm) {
+
+    loadInspectionVehicles();
+
+    displayInspections();
+
+
+    inspectionForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const vehicleSelect =
+                document.getElementById(
+                    "inspectionVehicle"
+                );
+
+            const vehicleIndex =
+                vehicleSelect.value;
+
+
+            if (vehicleIndex === "") {
+
+                alert(
+                    "Please select a vehicle."
+                );
+
+                return;
+
+            }
+
+
+            const vehicles =
+                JSON.parse(
+                    localStorage.getItem("vehicles")
+                ) || [];
+
+
+            const vehicle =
+                vehicles[vehicleIndex];
+
+
+            if (!vehicle) {
+
+                alert(
+                    "The selected vehicle could not be found."
+                );
+
+                return;
+
+            }
+
+
+            const inspectionType =
+                document.getElementById(
+                    "inspectionType"
+                ).value;
+
+
+            const inspectionStatus =
+                document.getElementById(
+                    "inspectionStatus"
+                ).value;
+
+
+            const notes =
+                document.getElementById(
+                    "inspectionNotes"
+                ).value.trim();
+
+
+            if (
+                inspectionType === "" ||
+                inspectionStatus === ""
+            ) {
+
+                alert(
+                    "Please complete the inspection type and status."
+                );
+
+                return;
+
+            }
+
+
+            // Get checklist results
+
+            const checklist =
+                document.querySelectorAll(
+                    'input[name="inspection"]'
+                );
+
+
+            const checkedItems = [];
+
+
+            checklist.forEach(function(item) {
+
+                if (item.checked) {
+
+                    checkedItems.push(
+                        item.value
+                    );
+
+                }
+
+            });
+
+
+            const inspection = {
+
+                date:
+                    new Date().toLocaleDateString(),
+
+                vehicle:
+                    vehicle.year + " " +
+                    vehicle.make + " " +
+                    vehicle.model,
+
+                type:
+                    inspectionType,
+
+                status:
+                    inspectionStatus,
+
+                checklist:
+                    checkedItems,
+
+                notes:
+                    notes
+
+            };
+
+
+            inspections.push(inspection);
+
+
+            localStorage.setItem(
+                "inspections",
+                JSON.stringify(inspections)
+            );
+
+
+            alert(
+                "Inspection saved successfully."
+            );
+
+
+            inspectionForm.reset();
+
+            displayInspections();
+
+        }
+    );
+
+}
