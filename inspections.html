@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FleetCheck - Inspections</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>FleetCheck Inspections</h1>
+</header>
+
+<nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="inspections.html">Inspections</a>
+    <a href="maintenance.html">Maintenance</a>
+    <a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<div class="container">
+
+    <!-- New Inspection -->
+
+    <div class="card">
+
+        <h2>New Vehicle Inspection</h2>
+
+        <form id="inspectionForm">
+
+            <label for="inspectionVehicle">
+                Vehicle
+            </label>
+
+            <select id="inspectionVehicle" required>
+
+                <option value="">
+                    Select a vehicle
+                </option>
+
+            </select>
+
+
+            <label for="inspectionType">
+                Inspection Type
+            </label>
+
+            <select id="inspectionType" required>
+
+                <option value="">
+                    Select inspection type
+                </option>
+
+                <option value="Pre-Trip">
+                    Pre-Trip
+                </option>
+
+                <option value="Post-Trip">
+                    Post-Trip
+                </option>
+
+            </select>
+
+
+            <h3>Inspection Checklist</h3>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Brakes">
+                    Brakes
+                </label>
+
+            </div>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Tires">
+                    Tires
+                </label>
+
+            </div>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Lights">
+                    Lights
+                </label>
+
+            </div>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Mirrors">
+                    Mirrors
+                </label>
+
+            </div>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Fluids">
+                    Fluids
+                </label>
+
+            </div>
+
+            <div class="inspection-item">
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="inspection"
+                        value="Safety Equipment">
+                    Safety Equipment
+                </label>
+
+            </div>
+
+
+            <label for="inspectionStatus">
+                Overall Status
+            </label>
+
+            <select id="inspectionStatus" required>
+
+                <option value="">
+                    Select status
+                </option>
+
+                <option value="Passed">
+                    Passed
+                </option>
+
+                <option value="Needs Attention">
+                    Needs Attention
+                </option>
+
+                <option value="Failed">
+                    Failed
+                </option>
+
+            </select>
+
+
+            <label for="inspectionNotes">
+                Inspection Notes
+            </label>
+
+            <textarea
+                id="inspectionNotes"
+                rows="5"
+                placeholder="Enter any problems or additional notes...">
+            </textarea>
+
+
+            <button type="submit">
+                Save Inspection
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Inspection History -->
+
+    <div class="card">
+
+        <h2>Inspection History</h2>
+
+        <table id="inspectionTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Vehicle</th>
+
+                    <th>Type</th>
+
+                    <th>Status</th>
+
+                    <th>Notes</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
