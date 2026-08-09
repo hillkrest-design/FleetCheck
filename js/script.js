@@ -1,273 +1,148 @@
 // ==========================================
-// FleetCheck - Sprint 1
-// JavaScript
+// FleetCheck
+// Main JavaScript File
+// Sprint 3
 // ==========================================
 
-// Login Form
+
+// ==========================================
+// LOGIN
+// ==========================================
+
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
-    loginForm.addEventListener("submit", function (event) {
+
+    loginForm.addEventListener("submit", function(event) {
 
         event.preventDefault();
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value.trim();
 
         if (email === "" || password === "") {
+
             alert("Please enter your email and password.");
+
             return;
         }
 
-        // Save demo user
-        localStorage.setItem("fleetcheckUser", email);
+        localStorage.setItem(
+            "fleetcheckUser",
+            email
+        );
 
-        // Go to dashboard
-        window.location.href = "dashboard.html";
+        window.location.href =
+            "dashboard.html";
+
     });
+
 }
 
-// Dashboard Welcome Message
-window.addEventListener("load", function () {
 
-    const welcome = document.getElementById("welcomeUser");
+// ==========================================
+// LOGOUT
+// ==========================================
+
+function logout() {
+
+    localStorage.removeItem(
+        "fleetcheckUser"
+    );
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+// ==========================================
+// DASHBOARD
+// ==========================================
+
+function loadDashboard() {
+
+    const welcome =
+        document.getElementById("welcomeUser");
 
     if (welcome) {
 
         const user =
-            localStorage.getItem("fleetcheckUser") ||
-            "FleetCheck User";
+            localStorage.getItem(
+                "fleetcheckUser"
+            ) || "FleetCheck User";
 
-        welcome.innerHTML =
+        welcome.textContent =
             "Welcome, " + user + "!";
-    }
-
-});
-
-// Logout
-function logout() {
-
-    localStorage.removeItem("fleetcheckUser");
-
-    window.location.href = "index.html";
-
-}
-
-// Add Vehicle Button
-function addVehicle() {
-
-    const make = prompt("Vehicle Make:");
-
-    if (make == null || make === "")
-        return;
-
-    const model = prompt("Vehicle Model:");
-
-    if (model == null || model === "")
-        return;
-
-    const year = prompt("Vehicle Year:");
-
-    if (year == null || year === "")
-        return;
-
-    const table = document.getElementById("vehicleTable");
-
-    if (!table)
-        return;
-
-    const row = table.insertRow();
-
-    row.insertCell(0).innerHTML = year;
-    row.insertCell(1).innerHTML = make;
-    row.insertCell(2).innerHTML = model;
-    row.insertCell(3).innerHTML = "Good";
-
-}
-
-// Demo Inspection Counter
-function inspectionsCompleted() {
-
-    let count =
-        Number(localStorage.getItem("inspectionCount")) || 0;
-
-    count++;
-
-    localStorage.setItem("inspectionCount", count);
-
-    const display =
-        document.getElementById("inspectionCount");
-
-    if (display)
-        display.innerHTML = count;
-
-}
-
-// Load inspection count
-window.addEventListener("load", function () {
-
-    const display =
-        document.getElementById("inspectionCount");
-
-    if (display) {
-
-        display.innerHTML =
-            Number(localStorage.getItem("inspectionCount")) || 0;
 
     }
 
-});
+
+    const inspectionCount =
+        document.getElementById(
+            "inspectionCount"
+        );
+
+    if (inspectionCount) {
+
+        const inspections =
+            JSON.parse(
+                localStorage.getItem("inspections")
+            ) || [];
+
+        inspectionCount.textContent =
+            inspections.length;
+
+    }
 
 
+    const vehicleCount =
+        document.getElementById(
+            "vehicleCount"
+        );
+
+    if (vehicleCount) {
+
+        const vehicles =
+            JSON.parse(
+                localStorage.getItem("vehicles")
+            ) || [];
+
+        vehicleCount.textContent =
+            vehicles.length;
+
+    }
+
+}
 
 
+window.addEventListener(
+    "load",
+    loadDashboard
+);
 
-// ===========================
-// Vehicle Management
-// ===========================
+
+// ==========================================
+// VEHICLE MANAGEMENT
+// ==========================================
 
 let vehicles =
-JSON.parse(localStorage.getItem("vehicles")) || [];
-
-const vehicleForm =
-document.getElementById("vehicleForm");
-
-if(vehicleForm){
-
-displayVehicles();
-
-vehicleForm.addEventListener("submit",function(e){
-
-e.preventDefault();
-
-const vehicle={
-
-year:document.getElementById("year").value,
-
-make:document.getElementById("make").value,
-
-model:document.getElementById("model").value,
-
-vin:document.getElementById("vin").value,
-
-mileage:document.getElementById("mileage").value
-
-};
-
-vehicles.push(vehicle);
-
-localStorage.setItem(
-"vehicles",
-JSON.stringify(vehicles)
-);
-
-displayVehicles();
-
-vehicleForm.reset();
-
-});
-
-}
-
-function displayVehicles(){
-
-const tbody=
-document.querySelector("#vehicleTable tbody");
-
-if(!tbody) return;
-
-tbody.innerHTML="";
-
-vehicles.forEach((vehicle,index)=>{
-
-let row=tbody.insertRow();
-
-row.insertCell(0).innerHTML=vehicle.year;
-row.insertCell(1).innerHTML=vehicle.make;
-row.insertCell(2).innerHTML=vehicle.model;
-row.insertCell(3).innerHTML=vehicle.vin;
-row.insertCell(4).innerHTML=vehicle.mileage;
-
-let action=row.insertCell(5);
-
-action.innerHTML=
-`<button onclick="deleteVehicle(${index})">
-Delete
-</button>`;
-
-});
-
-}
-
-function deleteVehicle(index){
-
-vehicles.splice(index,1);
-
-localStorage.setItem(
-"vehicles",
-JSON.stringify(vehicles)
-);
-
-displayVehicles();
-
-}
+    JSON.parse(
+        localStorage.getItem("vehicles")
+    ) || [];
 
 
-// ==========================================
-// FleetCheck - Inspection Management
-// Sprint 3
-// ==========================================
+// Display vehicles
 
-let inspections =
-    JSON.parse(localStorage.getItem("inspections")) || [];
-
-
-// ------------------------------------------
-// Load Vehicles Into Inspection Dropdown
-// ------------------------------------------
-
-function loadInspectionVehicles() {
-
-    const vehicleSelect =
-        document.getElementById("inspectionVehicle");
-
-    if (!vehicleSelect) {
-        return;
-    }
-
-    const vehicles =
-        JSON.parse(localStorage.getItem("vehicles")) || [];
-
-    vehicleSelect.innerHTML =
-        '<option value="">Select a vehicle</option>';
-
-    vehicles.forEach(function(vehicle, index) {
-
-        const option =
-            document.createElement("option");
-
-        option.value = index;
-
-        option.textContent =
-            vehicle.year + " " +
-            vehicle.make + " " +
-            vehicle.model;
-
-        vehicleSelect.appendChild(option);
-
-    });
-
-}
-
-
-// ------------------------------------------
-// Display Inspection History
-// ------------------------------------------
-
-function displayInspections() {
+function displayVehicles() {
 
     const tableBody =
-        document.querySelector("#inspectionTable tbody");
+        document.querySelector(
+            "#vehicleTable tbody"
+        );
 
     if (!tableBody) {
         return;
@@ -275,7 +150,7 @@ function displayInspections() {
 
     tableBody.innerHTML = "";
 
-    if (inspections.length === 0) {
+    if (vehicles.length === 0) {
 
         const row =
             tableBody.insertRow();
@@ -283,45 +158,348 @@ function displayInspections() {
         const cell =
             row.insertCell(0);
 
-        cell.colSpan = 5;
+        cell.colSpan = 6;
 
-        cell.innerHTML =
-            "No inspections have been recorded yet.";
+        cell.textContent =
+            "No vehicles have been added yet.";
 
         return;
     }
 
-    inspections.forEach(function(inspection) {
 
-        const row =
-            tableBody.insertRow();
+    vehicles.forEach(
+        function(vehicle, index) {
 
-        row.insertCell(0).textContent =
-            inspection.date;
+            const row =
+                tableBody.insertRow();
 
-        row.insertCell(1).textContent =
-            inspection.vehicle;
+            row.insertCell(0).textContent =
+                vehicle.year;
 
-        row.insertCell(2).textContent =
-            inspection.type;
+            row.insertCell(1).textContent =
+                vehicle.make;
 
-        row.insertCell(3).textContent =
-            inspection.status;
+            row.insertCell(2).textContent =
+                vehicle.model;
 
-        row.insertCell(4).textContent =
-            inspection.notes || "None";
+            row.insertCell(3).textContent =
+                vehicle.vin || "N/A";
 
-    });
+            row.insertCell(4).textContent =
+                vehicle.mileage || "N/A";
+
+
+            const actionCell =
+                row.insertCell(5);
+
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+            deleteButton.textContent =
+                "Delete";
+
+            deleteButton.onclick =
+                function() {
+
+                    deleteVehicle(index);
+
+                };
+
+
+            actionCell.appendChild(
+                deleteButton
+            );
+
+        }
+    );
 
 }
 
 
-// ------------------------------------------
-// Inspection Form
-// ------------------------------------------
+// Add vehicle form
+
+const vehicleForm =
+    document.getElementById(
+        "vehicleForm"
+    );
+
+
+if (vehicleForm) {
+
+    displayVehicles();
+
+
+    vehicleForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const year =
+                document.getElementById(
+                    "year"
+                ).value.trim();
+
+
+            const make =
+                document.getElementById(
+                    "make"
+                ).value.trim();
+
+
+            const model =
+                document.getElementById(
+                    "model"
+                ).value.trim();
+
+
+            const vin =
+                document.getElementById(
+                    "vin"
+                ).value.trim();
+
+
+            const mileage =
+                document.getElementById(
+                    "mileage"
+                ).value.trim();
+
+
+            if (
+                year === "" ||
+                make === "" ||
+                model === ""
+            ) {
+
+                alert(
+                    "Please enter the year, make, and model."
+                );
+
+                return;
+
+            }
+
+
+            const vehicle = {
+
+                year: year,
+
+                make: make,
+
+                model: model,
+
+                vin: vin,
+
+                mileage: mileage
+
+            };
+
+
+            vehicles.push(vehicle);
+
+
+            localStorage.setItem(
+                "vehicles",
+                JSON.stringify(vehicles)
+            );
+
+
+            vehicleForm.reset();
+
+            displayVehicles();
+
+
+            alert(
+                "Vehicle added successfully."
+            );
+
+        }
+    );
+
+}
+
+
+// Delete vehicle
+
+function deleteVehicle(index) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this vehicle?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    vehicles.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "vehicles",
+        JSON.stringify(vehicles)
+    );
+
+
+    displayVehicles();
+
+}
+
+
+// ==========================================
+// INSPECTION MANAGEMENT
+// ==========================================
+
+let inspections =
+    JSON.parse(
+        localStorage.getItem("inspections")
+    ) || [];
+
+
+// Load vehicles into inspection dropdown
+
+function loadInspectionVehicles() {
+
+    const vehicleSelect =
+        document.getElementById(
+            "inspectionVehicle"
+        );
+
+
+    if (!vehicleSelect) {
+        return;
+    }
+
+
+    const savedVehicles =
+        JSON.parse(
+            localStorage.getItem("vehicles")
+        ) || [];
+
+
+    vehicleSelect.innerHTML =
+        '<option value="">Select a vehicle</option>';
+
+
+    savedVehicles.forEach(
+        function(vehicle, index) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                index;
+
+
+            option.textContent =
+                vehicle.year +
+                " " +
+                vehicle.make +
+                " " +
+                vehicle.model;
+
+
+            vehicleSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+// Display inspection history
+
+function displayInspections() {
+
+    const tableBody =
+        document.querySelector(
+            "#inspectionTable tbody"
+        );
+
+
+    if (!tableBody) {
+        return;
+    }
+
+
+    tableBody.innerHTML = "";
+
+
+    if (inspections.length === 0) {
+
+        const row =
+            tableBody.insertRow();
+
+
+        const cell =
+            row.insertCell(0);
+
+
+        cell.colSpan = 5;
+
+
+        cell.textContent =
+            "No inspections have been recorded yet.";
+
+
+        return;
+
+    }
+
+
+    inspections.forEach(
+        function(inspection) {
+
+            const row =
+                tableBody.insertRow();
+
+
+            row.insertCell(0).textContent =
+                inspection.date;
+
+
+            row.insertCell(1).textContent =
+                inspection.vehicle;
+
+
+            row.insertCell(2).textContent =
+                inspection.type;
+
+
+            row.insertCell(3).textContent =
+                inspection.status;
+
+
+            row.insertCell(4).textContent =
+                inspection.notes ||
+                "None";
+
+        }
+    );
+
+}
+
+
+// Inspection form
 
 const inspectionForm =
-    document.getElementById("inspectionForm");
+    document.getElementById(
+        "inspectionForm"
+    );
 
 
 if (inspectionForm) {
@@ -343,6 +521,7 @@ if (inspectionForm) {
                     "inspectionVehicle"
                 );
 
+
             const vehicleIndex =
                 vehicleSelect.value;
 
@@ -358,14 +537,16 @@ if (inspectionForm) {
             }
 
 
-            const vehicles =
+            const savedVehicles =
                 JSON.parse(
                     localStorage.getItem("vehicles")
                 ) || [];
 
 
             const vehicle =
-                vehicles[vehicleIndex];
+                savedVehicles[
+                    vehicleIndex
+                ];
 
 
             if (!vehicle) {
@@ -403,7 +584,7 @@ if (inspectionForm) {
             ) {
 
                 alert(
-                    "Please complete the inspection type and status."
+                    "Please complete the inspection type and overall status."
                 );
 
                 return;
@@ -411,38 +592,45 @@ if (inspectionForm) {
             }
 
 
-            // Get checklist results
+            // Collect individual checklist results
 
-            const checklist =
+            const resultFields =
                 document.querySelectorAll(
-                    'input[name="inspection"]'
+                    ".inspection-result"
                 );
 
 
-            const checkedItems = [];
+            const checklistResults = [];
 
 
-            checklist.forEach(function(item) {
+            resultFields.forEach(
+                function(field) {
 
-                if (item.checked) {
+                    checklistResults.push({
 
-                    checkedItems.push(
-                        item.value
-                    );
+                        item:
+                            field.dataset.item,
+
+                        result:
+                            field.value
+
+                    });
 
                 }
-
-            });
+            );
 
 
             const inspection = {
 
                 date:
-                    new Date().toLocaleDateString(),
+                    new Date()
+                        .toLocaleDateString(),
 
                 vehicle:
-                    vehicle.year + " " +
-                    vehicle.make + " " +
+                    vehicle.year +
+                    " " +
+                    vehicle.make +
+                    " " +
                     vehicle.model,
 
                 type:
@@ -452,7 +640,7 @@ if (inspectionForm) {
                     inspectionStatus,
 
                 checklist:
-                    checkedItems,
+                    checklistResults,
 
                 notes:
                     notes
@@ -460,7 +648,9 @@ if (inspectionForm) {
             };
 
 
-            inspections.push(inspection);
+            inspections.push(
+                inspection
+            );
 
 
             localStorage.setItem(
@@ -476,9 +666,47 @@ if (inspectionForm) {
 
             inspectionForm.reset();
 
+
             displayInspections();
 
         }
     );
 
 }
+
+
+// ==========================================
+// INSPECTION COUNT
+// ==========================================
+
+function getInspectionCount() {
+
+    const savedInspections =
+        JSON.parse(
+            localStorage.getItem("inspections")
+        ) || [];
+
+
+    return savedInspections.length;
+
+}
+
+
+// ==========================================
+// INITIALIZE PAGES
+// ==========================================
+
+window.addEventListener(
+    "load",
+    function() {
+
+        displayVehicles();
+
+        loadInspectionVehicles();
+
+        displayInspections();
+
+        loadDashboard();
+
+    }
+);
