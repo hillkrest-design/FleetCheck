@@ -2,43 +2,77 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>FleetCheck - Inspections</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/style.css">
+
 </head>
 
 <body>
 
 <header>
+
     <h1>FleetCheck Inspections</h1>
+
 </header>
 
+
 <nav>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="vehicles.html">Vehicles</a>
-    <a href="inspections.html">Inspections</a>
-    <a href="maintenance.html">Maintenance</a>
-    <a href="#" onclick="logout()">Logout</a>
+
+    <a href="dashboard.html">
+        Dashboard
+    </a>
+
+    <a href="vehicles.html">
+        Vehicles
+    </a>
+
+    <a href="inspections.html">
+        Inspections
+    </a>
+
+    <a href="maintenance.html">
+        Maintenance
+    </a>
+
+    <a href="#" onclick="logout()">
+        Logout
+    </a>
+
 </nav>
+
 
 <div class="container">
 
-    <!-- New Inspection -->
+
+    <!-- =====================================
+         NEW INSPECTION
+         ===================================== -->
 
     <div class="card">
 
         <h2>New Vehicle Inspection</h2>
 
+
         <form id="inspectionForm">
+
+
+            <!-- Vehicle -->
 
             <label for="inspectionVehicle">
                 Vehicle
             </label>
 
-            <select id="inspectionVehicle" required>
+            <select
+                id="inspectionVehicle"
+                required>
 
                 <option value="">
                     Select a vehicle
@@ -47,11 +81,15 @@
             </select>
 
 
+            <!-- Inspection Type -->
+
             <label for="inspectionType">
                 Inspection Type
             </label>
 
-            <select id="inspectionType" required>
+            <select
+                id="inspectionType"
+                required>
 
                 <option value="">
                     Select inspection type
@@ -68,87 +106,194 @@
             </select>
 
 
-            <h3>Inspection Checklist</h3>
+            <!-- =================================
+                 CHECKLIST
+                 ================================= -->
 
-<div class="inspection-item">
+            <h3>
+                Inspection Checklist
+            </h3>
 
-    <label>Brakes</label>
 
-    <select class="inspection-result" data-item="Brakes">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
+            <div class="inspection-item">
 
-</div>
+                <label for="brakes">
+                    Brakes
+                </label>
 
-<div class="inspection-item">
+                <select
+                    id="brakes"
+                    class="inspection-result"
+                    data-item="Brakes">
 
-    <label>Tires</label>
+                    <option value="Pass">
+                        Pass
+                    </option>
 
-    <select class="inspection-result" data-item="Tires">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
 
-</div>
+                    <option value="Fail">
+                        Fail
+                    </option>
 
-<div class="inspection-item">
+                </select>
 
-    <label>Lights</label>
+            </div>
 
-    <select class="inspection-result" data-item="Lights">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
 
-</div>
+            <div class="inspection-item">
 
-<div class="inspection-item">
+                <label for="tires">
+                    Tires
+                </label>
 
-    <label>Mirrors</label>
+                <select
+                    id="tires"
+                    class="inspection-result"
+                    data-item="Tires">
 
-    <select class="inspection-result" data-item="Mirrors">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
+                    <option value="Pass">
+                        Pass
+                    </option>
 
-</div>
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
 
-<div class="inspection-item">
+                    <option value="Fail">
+                        Fail
+                    </option>
 
-    <label>Fluids</label>
+                </select>
 
-    <select class="inspection-result" data-item="Fluids">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
+            </div>
 
-</div>
 
-<div class="inspection-item">
+            <div class="inspection-item">
 
-    <label>Safety Equipment</label>
+                <label for="lights">
+                    Lights
+                </label>
 
-    <select class="inspection-result" data-item="Safety Equipment">
-        <option value="Pass">Pass</option>
-        <option value="Needs Attention">Needs Attention</option>
-        <option value="Fail">Fail</option>
-    </select>
+                <select
+                    id="lights"
+                    class="inspection-result"
+                    data-item="Lights">
 
-</div>
+                    <option value="Pass">
+                        Pass
+                    </option>
 
-            
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
+
+                    <option value="Fail">
+                        Fail
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="inspection-item">
+
+                <label for="mirrors">
+                    Mirrors
+                </label>
+
+                <select
+                    id="mirrors"
+                    class="inspection-result"
+                    data-item="Mirrors">
+
+                    <option value="Pass">
+                        Pass
+                    </option>
+
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
+
+                    <option value="Fail">
+                        Fail
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="inspection-item">
+
+                <label for="fluids">
+                    Fluids
+                </label>
+
+                <select
+                    id="fluids"
+                    class="inspection-result"
+                    data-item="Fluids">
+
+                    <option value="Pass">
+                        Pass
+                    </option>
+
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
+
+                    <option value="Fail">
+                        Fail
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="inspection-item">
+
+                <label for="safety">
+                    Safety Equipment
+                </label>
+
+                <select
+                    id="safety"
+                    class="inspection-result"
+                    data-item="Safety Equipment">
+
+                    <option value="Pass">
+                        Pass
+                    </option>
+
+                    <option value="Needs Attention">
+                        Needs Attention
+                    </option>
+
+                    <option value="Fail">
+                        Fail
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================
+                 OVERALL STATUS
+                 ================================= -->
 
             <label for="inspectionStatus">
                 Overall Status
             </label>
 
-            <select id="inspectionStatus" required>
+            <select
+                id="inspectionStatus"
+                required>
 
                 <option value="">
                     Select status
@@ -169,6 +314,8 @@
             </select>
 
 
+            <!-- Notes -->
+
             <label for="inspectionNotes">
                 Inspection Notes
             </label>
@@ -180,20 +327,28 @@
             </textarea>
 
 
+            <!-- Submit -->
+
             <button type="submit">
                 Save Inspection
             </button>
+
 
         </form>
 
     </div>
 
 
-    <!-- Inspection History -->
+    <!-- =====================================
+         INSPECTION HISTORY
+         ===================================== -->
 
     <div class="card">
 
-        <h2>Inspection History</h2>
+        <h2>
+            Inspection History
+        </h2>
+
 
         <table id="inspectionTable">
 
@@ -201,19 +356,30 @@
 
                 <tr>
 
-                    <th>Date</th>
+                    <th>
+                        Date
+                    </th>
 
-                    <th>Vehicle</th>
+                    <th>
+                        Vehicle
+                    </th>
 
-                    <th>Type</th>
+                    <th>
+                        Type
+                    </th>
 
-                    <th>Status</th>
+                    <th>
+                        Status
+                    </th>
 
-                    <th>Notes</th>
+                    <th>
+                        Notes
+                    </th>
 
                 </tr>
 
             </thead>
+
 
             <tbody>
 
@@ -223,7 +389,9 @@
 
     </div>
 
+
 </div>
+
 
 <script src="js/script.js"></script>
 
